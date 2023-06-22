@@ -2,8 +2,8 @@ import componentsImage from './assets/images/components.png';
 import stateImage from './assets/images/state.png';
 import eventsImage from './assets/images/events.png';
 
-import Header from './components/Header';
-import KeyConcepts from './components/KeyConcepts';
+import Header from './components/Header/Header';
+import Concepts from './components/Concept/Concepts';
 
 const concepts = [
   {
@@ -30,7 +30,7 @@ function App() {
   return (
     <div>
       <Header />
-      <KeyConcepts items={concepts} />
+      <Concepts items={concepts} />
     </div>
   );
 }

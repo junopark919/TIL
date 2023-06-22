@@ -1,4 +1,4 @@
-const KeyConcept = (props) => {
+const Concept = (props) => {
   return (
     <li className='concept'>
       <img src={props.items.image} alt={props.items.title} />
@@ -8,4 +8,4 @@ const KeyConcept = (props) => {
   );
 };
 
-export default KeyConcept;
+export default Concept;
