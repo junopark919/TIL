@@ -1,8 +1,10 @@
 # What is React?
 
-_React is a JavaScript library for building User interfaces._<br><br>
+_React is a JavaScript library for building User interfaces._
 
-## Why React?
+<br>
+
+## 2. Why React?
 
 JavaScript is not a great option.
 
@@ -10,16 +12,17 @@ JavaScript is not a great option.
 - error-prone
 - hard to maintain
 - not a simpler _mental model_
-  <br><br>
 
-## Declarative vs Imperative
+<br>
+
+## 3. Declarative vs Imperative
 
 - Declarative: define the target, not the steps — _React_
 - Imperative: define the steps, not the goal — _JavaScript_<br>
 
 Therefore, React will figure out and perform the necessary steps.<br><br>
 
-## Start command
+## 4. Start command
 
 - Install the dependeicies for the project
 
@@ -33,15 +36,17 @@ npm install
 npm start
 ```
 
-<br><br>
+<br>
 
-# What are components?
+## 5. What are components?
 
-React makes building **complex**, **interactive** and **reactive** user interfaces **simpler**. All user interfaces in the end are made up of **components**.<br><br>
+React makes building **complex**, **interactive** and **reactive** user interfaces **simpler**. All user interfaces in the end are made up of **components**.
 
-## Why components?
+<br>
 
-- reusability
-- separation of concerns<br>
+## W6. hy components?
 
-Split big chucks of code into multiple smaller functions<br><br>
+- Reusability
+- Separation of concerns
+
+Split big chunks of code into multiple smaller functions.

@@ -1,11 +1,18 @@
-# What is JSX?
+# Component-Driven User Interfaces
 
-- JSX = JavaScript XML(eXtensible Markup Language)
-- developer friendly code(Syntactic sugar) → transformed behind the scenes → run in the browser
+- React core syntax & JSX
+- Working with components
 
 <br>
 
-# Building a Component
+## 1. What is JSX?
+
+- JSX = JavaScript XML(eXtensible Markup Language)
+- Developer friendly code(syntactic sugar) → transformed behind the scenes → run in the browser
+
+<br>
+
+## 2. Building a Component
 
 - One **file** per **component**
 - Build a component tree from App.js(root component)
@@ -15,7 +22,7 @@
 
 <br>
 
-# Props
+## 3. Props
 
 - The attributes of your custom HTML elements(components)
 - Components can't just use data stored in other components
@@ -24,9 +31,9 @@
 
 <br>
 
-## Ways of Props
+### Ways of Props
 
-- parent component
+- Parent component
 
 ```
 > Example 1
@@ -36,7 +43,7 @@
 <ExpenseItem expense={expense[0]}>
 ```
 
-- child component
+- Child component
 
 ```
 > Example 1
@@ -60,7 +67,7 @@ function ExpenseItem({data, title, amount}) {
 
 <br>
 
-# Splitting Components
+## 4. Splitting Components
 
 - Always keep your component small and focused — more manageable
 - Split one bigger component to multiple components and files
@@ -68,7 +75,7 @@ function ExpenseItem({data, title, amount}) {
 
 <br>
 
-# Composition(children props)
+## 5. Composition(children props)
 
 - The approach of building a user interface from smaller building blocks
 - For HTML structure/style duplication
