@@ -1,6 +1,6 @@
 # TIL
 
-Today I learned: a collection of brief notes, small projects I've created while studying to become a fron t-end web developer, and various tricks I’ve acquired along the way. This repository serves as a resource for review and sharing with others.
+Today I learned: a collection of brief notes, small projects I've created while studying to become a front-end web developer, and various tricks I’ve acquired along the way. This repository serves as a resource for review and sharing with others.
 
 <br>
 
