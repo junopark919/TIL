@@ -10,22 +10,10 @@
 
 - Add an event listener to a React element(on + the event name prop such as onClick)
 
-```JavaScript
-<button
-  onClick={() => {
-    console.log('Clicked!');
-  }}
->
-  Change title
-</button>
-```
-
 ```javascript
 const clickHandler = () => {
-  console.log('Clicked!!!!!');
+  console.log('Clicked!');
 };
-
-...
 
 <button onClick={clickHandler}>Change title</button>;
 ```
@@ -34,32 +22,27 @@ const clickHandler = () => {
 
 ## 2. State
 
-- Component functions need to be called again for data changes.
-- React never repeats anymore after initial rendering.
-- **State** allows us to define values as state where changes to these values should reflect in the component function being called again.
-- `useState(title, setTitle)`
-  - `title`: current state value
-  - `setTitle`: a function for updating `title`
+- Component functions need to be called again for data changes, but React never repeats anymore after initial rendering.
+- State allows us to define values as state where changes to these values should reflect in the component function being called again.
 
 ```javascript
 import { useState } from 'react';
 
 const ExpenseItem = (props) => {
   const [title, setTitle] = useState(props.title);
+  // title(current state value) / setTitle(a function for updating title)
 
   const clickHandler = () => {
     setTitle('Updated!');
   };
-
-  ...
 };
 ```
 
-- **State is separated on a per component instance basis** — that's why we use 'const' here and call useState function to change the value.
+- **State is separated on a per component instance basis** — that is why we use 'const' and call useState function to change the value.
 
-## 3. Multiple States
+<br>
 
-- Normal way
+### - In Case of Multiple States
 
 ```javascript
 const [enteredTitle, setEnteredTitle] = useState('');
@@ -71,7 +54,7 @@ const titleChangeHandler = (event) => {
 };
 ```
 
-- Alternative way
+- Alternative approach for multiple states 1
 
 ```javascript
 const [userInput, setUserInput] = useState({
@@ -88,7 +71,7 @@ const titleChangeHandler = (event) => {
 };
 ```
 
-- Safer way: depends on the previous state
+- Alternative approach for multiple states 2 (This is safer)
 
 ```javascript
 const titleChangeHandler = (event) => {
@@ -98,3 +81,99 @@ const titleChangeHandler = (event) => {
   });
 };
 ```
+
+- Alternative approach for mutiple handlers: using one shared handler function
+
+```javascript
+const inputChangeHandler = (identifier, value) => {
+  if (identifier === 'title') {
+    setEnteredTitle(value);
+  } else if (identifier === 'date') {
+    setEnteredDate(value);
+  } else {
+    setEnteredAmount(value);
+  }
+};
+
+<input
+  type='text'
+  onChange={(event) => inputChangeHandler('title', event.target.value)}
+/>;
+```
+
+<br>
+
+## 4. Submission
+
+```javascript
+const submitHandler = (event) => {
+  event.preventDefault(); // Prevent the default of the server request being sent (not reload anymore)
+
+  const expenseData = {
+    title: enteredTitle,
+    amount: enteredAmount,
+    date: new Date(enteredDate),
+  };
+};
+
+// in form
+<form onSubmit={submitHandler}></form>;
+```
+
+<br>
+
+## 5. Two-Way Binding
+
+- Not only listen to changes in the input to update your state, but also feed the state back into the input.
+- You can both gather user input and change it.
+
+```javascript
+// in submit handler function
+const submitHandler = (event) => {
+  setEnteredTitle('');
+  setEnteredAmount('');
+  setEnteredDate('');
+};
+
+// on input elements
+<input
+  value={enteredTitle}
+  onChange={(event) => inputChangeHandler('title', event.target.value)}
+/>;
+```
+
+<br>
+
+## 6. Child-to-Parent Component Communication (Bottom-up)
+
+- Pass the data in the opposite direction of _props_.
+- Create our own event props and expect functions as values.
+- Pass data to that function as a parameter.
+
+```javascript
+// Parent component
+// in new expense component(upper component)
+const saveExpenseDataHandler = (enteredExpenseData) => {
+  const expenseData = {
+    ...enteredExpenseData,
+    id: Math.random().toString(), // It's temporary
+  };
+};
+
+// on expense form component element
+<ExpenseForm onSaveExpenseData={saveExpenseDataHandler} />;
+```
+
+```javascript
+// Child component
+// in submit handler component
+props.onSaveExpenseData(expenseData);
+```
+
+<br>
+
+## 7. Lifting State Up
+
+- No direct connection between sibling components.
+- Only communicate from child to parent and then parent to child: _lifting state up → passing data via props_.
+- Lift it up just as high as necessary in your component tree until you have a component which has both access to the components.
