@@ -177,3 +177,34 @@ props.onSaveExpenseData(expenseData);
 - No direct connection between sibling components.
 - Only communicate from child to parent and then parent to child: _lifting state up → passing data via props_.
 - Lift it up just as high as necessary in your component tree until you have a component which has both access to the components.
+
+## 8. Derived and Computed State
+
+- Depnding on the same source, one state would be enough.
+- Instead of being managed as a standalone state which updates whenever the other state updates.
+- When the state is updated, the component function will re-execute again anyway.
+
+```javascript
+let filterInfoText = '2019, 2021 & 2022';
+
+if (filteredYear === '2019') {
+  filterInfoText = '2020, 2021 & 2022';
+} else if (filteredYear === '2021') {
+  filterInfoText = '2019, 2020 & 2022';
+} else {
+  filterInfoText = '2019, 2020 & 2021';
+}
+
+<p>Data for year {filterInfoText} is hidden.</p>;
+```
+
+<br>
+
+## 9. Controlled vs Uncontrolled / Stateless vs Stateful Components
+
+- Controlled/Stateful
+  - Manage state
+  - Pass the data through props
+- Uncontrolled/Stateless
+  - Presentational/dumb component
+  - Just to output some data
