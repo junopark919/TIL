@@ -1,9 +1,9 @@
-# Conditional Content
+# Rendering Content
 
 ## 1. Rendering List
 
 - `map()` method creates a new array with each element being the result of the callback function.
-- React simply renders these JSX elements y side by side.
+- React simply renders these JSX elements by side by side.
 
 ```javascript
 {
@@ -108,4 +108,12 @@ if (filteredExpenses.length > 0) {
 {
   expensesContent;
 }
+```
+
+## Adding Styles
+
+```javascript
+<div className='chart-bar__fill' style={{ height: barFillHeight }}></div>
+<div className='chart-bar__fill' style={{ 'background-color': 'red' }}></div>
+<div className='chart-bar__fill' style={{ backgroundColor: 'red' }}></div>
 ```
