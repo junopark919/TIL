@@ -36,7 +36,7 @@
 
 <br>
 
-### - Styled-Components
+### Styled-Components
 
 ```javascript
 import styled from 'styled-components';
@@ -50,4 +50,40 @@ const button = styled.button`
     Pseudo-styles here
   }
 `; // tagged temparate literal
+```
+
+<br>
+
+### With Props
+
+```javascript
+<FormControl invalid={!isValid}>
+```
+
+```javascript
+  & label {
+    color: ${(props) => (props.invalid ? 'red' : 'black')};
+  }
+
+  & input {
+    border: 1px solid ${(props) => (props.invalid ? 'red' : '#ccc')};
+    background: ${(props) => (props.invalid ? '#ffd7d7' : 'transparent')};
+  }
+```
+
+<br>
+
+### CSS Modules
+
+```javascript
+import styles from './Button.module.css';
+
+<button className={styles.button}></button>;
+```
+
+```javascript
+<div className={`${styles['form-control']} ${!isValid && styles.invalid}`}>
+  <label>Course Goal</label>
+  <input type='text' onChange={goalInputChangeHandler} />
+</div>
 ```
