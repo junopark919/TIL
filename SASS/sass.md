@@ -1,0 +1,189 @@
+# 1. What is SASS?
+
+- SASS is a CSS preprocessor, an extension of CSS that adds power and elegance to the basic language.
+- SASS source code → SASS compiler → compiled CSS code
+
+<br>
+
+## 1. Main SASS Features
+
+- Variables: for reusable values such as colors, font-sizes, spacing, etc.
+- Nesting: to nest selectors inside of one another, allowing us to write less code.
+- Operators: for mathematical operations right inside of CSS.
+- Partials and imports: to write CSS in different files and importing them all into one single file.
+- Mixiins: to write reusable pieces of CSS code.
+- Functions: similar to mixins, with the difference that they produce a value that can be used.
+- Extends: to make different selectors inherit declarations that are common to all of them.
+- Control directives: for writing complex code using conditionals and loops.
+
+<br>
+
+# 2. Variables and Nesting
+
+## 1. Variable
+
+```scss
+$color-primary: #f9ed69;
+$color-secondary: #f08a5d;
+$color-tertiary: #b83b5e;
+$color-text-dark: #333;
+$color-text-light: #eee;
+
+$width-button: 150px;
+
+nav {
+  background-color: $color-primary;
+
+  &::after {
+    content: '';
+    clear: both;
+    display: table;
+  }
+}
+```
+
+## 2. Nesting
+
+```scss
+.nav {
+  list-style: none;
+  float: left;
+
+  li {
+    display: inline-block;
+    margin-left: 30px;
+
+    &:first-child {
+      margin: 0;
+    }
+
+    a:link {
+      text-decoration: none;
+      text-transform: uppercase;
+      color: $color-text-dark;
+    }
+  }
+}
+
+.buttons {
+  float: right;
+}
+
+.btn-main:link,
+.btn-hot:link {
+  padding: 10px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 100px;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: $width-button;
+  color: $color-text-light;
+}
+
+.btn-main {
+  &:link {
+    background-color: $color-secondary;
+  }
+
+  &:hover {
+    background-color: darken($color-secondary, 15%);
+  }
+}
+
+.btn-hot {
+  &:link {
+    background-color: $color-tertiary;
+  }
+
+  &:hover {
+    background-color: darken($color-tertiary, 10%);
+  }
+}
+```
+
+<br>
+
+# 3. Mixins, Extends and Functions
+
+## 1. Mixins
+
+```scss
+@mixin clearfix {
+  &::after {
+    content: '';
+    clear: both;
+    display: table;
+  }
+}
+
+@mixin style-link-text($col) {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: $col;
+}
+
+.nav {
+  @include clearfix;
+
+  li {
+    a:link {
+      @include style-link-text($color-text-dark);
+    }
+  }
+}
+
+.btn-main:link,
+.btn-hot:link {
+  @include style-link-text($color-text-light);
+}
+```
+
+<br>
+
+## 2. Functions
+
+```scss
+@function divide($a, $b) {
+  @return $a / $b;
+}
+
+nav {
+  margin: divide(60, 2) * 1px;
+}
+```
+
+## 3. Extends
+
+```scss
+%btn-placeholder {
+  padding: 10px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 100px;
+  width: $width-button;
+  @include style-link-text($color-text-light);
+}
+
+.btn-main {
+  &:link {
+    @extend %btn-placeholder;
+    background-color: $color-secondary;
+  }
+
+  &:hover {
+    background-color: darken($color-secondary, 15%);
+  }
+}
+
+.btn-hot {
+  &:link {
+    @extend %btn-placeholder;
+    background-color: $color-tertiary;
+  }
+
+  &:hover {
+    background-color: lighten($color-tertiary, 10%);
+  }
+}
+```
