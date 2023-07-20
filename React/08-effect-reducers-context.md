@@ -156,7 +156,36 @@ useEffect(() => {
 - We also have the cleanup function, which we can return.
 - The cleanup function runs **before** this state function as a whole runs, but **not before the first time it runs**.
 
+<br>
+
 ## 2. Managing More Complex State with Reducers
+
+### 1. What is useReducers and Reducers?
+
+- For more complex state ⏤ multiple states, multiple ways of changing or dependencies.
+- useState() often becomes hard or error-prone to use in such scenarios.
+- useReducer() can be a replacement for useState() ⏤ more powerful state management.
+
+<br>
+
+### 2. Using the useReducer() Hook
+
+```javascript
+const [state, dispatchFn] = useReducer(reducerFn, initialState, initFn);
+```
+
+- **state**: The state snapshot used in the component re-render/re-evaluation cycle.
+- **dispatchFn**: A function that can be used to dispatch a new action. (i.e. trigger an update of the state)
+- **reducerFn**:
+
+  ```javascript
+  (prevState, action) => newState;
+  ```
+
+  A function that is triggered automatically once an action is dispatched. (via dispatchFn()) ⏤ it receives the latest state snapshot and should return the new, updated state.
+
+- **initialState**: The initial state.
+- **initFn**: A function to set the initial state programmatically.
 
 <br>
 
