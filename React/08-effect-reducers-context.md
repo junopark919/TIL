@@ -189,4 +189,57 @@ const [state, dispatchFn] = useReducer(reducerFn, initialState, initFn);
 
 <br>
 
+### 3. useState() vs useReducer()
+
+- When using useState() becomes cumbersome or you're getting a lot of bugs/unintended behaviors.
+- useState()
+  - The main state management **tool**.
+  - It's for ndependent pieces of state/data.
+  - State updates are easy and limited to a few kinds of updates.
+- useReducer()
+  - You need **more power**.
+  - You have related pieces of state/data.
+  - You have more complex state updates.
+
+<br>
+
 ## 3. Managing App-Wide or Component-Wide State with Context
+
+- Making a context file in `src/store/auth-context.js`
+
+```javascript
+const AuthContext = React.createContext({
+  isLoggedIn: false,
+});
+```
+
+- Providing the context to all the components(including the dependant components).
+
+```javascript
+import AuthContext from './store/auth-context';
+
+// Taking states from context through value and update dafult value.
+<AuthContext.Provider value={{ isLoggedIn: isLoggedIn }}>
+  ...
+</AuthContext.Provider>;
+```
+
+- Listening to Context to get the needed state directly.
+
+```javascript
+<AuthContext.Consumer>
+  {(ctx) => {
+    return (
+      <nav className={classes.nav}>
+        <ul>
+          {ctx.isLoggedIn && (
+            <li>
+              <a href='/'>Users</a>
+            </li>
+          )}
+        ...
+      </nav>
+    );
+  }}
+</AuthContext.Consumer>
+```

@@ -56,9 +56,12 @@ const Login = (props) => {
     };
   }, []);
 
+  // emailIsValid = emailState.isValid
+  // passwordIsValid = passwordState.isValid
   const { isValid: emailIsValid } = emailState;
   const { isValid: passwordIsValid } = passwordState;
 
+  // Then no more validatation after valid is true
   useEffect(() => {
     const identifier = setTimeout(() => {
       console.log('Checking from validity!');
