@@ -1,11 +1,15 @@
-# 1. What is SASS?
+# SASS and NPM
+
+## 1. What is SASS?
+
+### 1. What is SASS?
 
 - SASS is a CSS preprocessor, an extension of CSS that adds power and elegance to the basic language.
 - SASS source code → SASS compiler → compiled CSS code
 
 <br>
 
-## 1. Main SASS Features
+### 2. Main SASS Features
 
 - Variables: for reusable values such as colors, font-sizes, spacing, etc.
 - Nesting: to nest selectors inside of one another, allowing us to write less code.
@@ -18,9 +22,9 @@
 
 <br>
 
-# 2. Variables and Nesting
+## 2. Variables, Nesting, Mixins, Extends and Functions
 
-## 1. Variable
+### 1. Variable
 
 ```scss
 $color-primary: #f9ed69;
@@ -104,9 +108,7 @@ nav {
 
 <br>
 
-# 3. Mixins, Extends and Functions
-
-## 1. Mixins
+## 3. Mixins
 
 ```scss
 @mixin clearfix {
@@ -139,9 +141,7 @@ nav {
 }
 ```
 
-<br>
-
-## 2. Functions
+## 4. Functions
 
 ```scss
 @function divide($a, $b) {
@@ -153,7 +153,7 @@ nav {
 }
 ```
 
-## 3. Extends
+## 5. Extends
 
 ```scss
 %btn-placeholder {
@@ -186,4 +186,36 @@ nav {
     background-color: lighten($color-tertiary, 10%);
   }
 }
+```
+
+<br>
+
+## 4. NPM and the Node Ecosystem
+
+- NodeJS: Allows developers to write and run JavaScript applicatios on the server. Developers started using node.js to also write tools to help them with local web development.
+- NPM: NPM is a simple command line interface that allows developers to install and manage packages on their local computers. There are all kinds of open-source tools, libraries and frameworks needed for modern development. Modern web development could simply not exist without a package manager.
+
+<br>
+
+## 5. NPM Packages
+
+- Initiate npm packages in a project.
+
+```bash
+npm init
+```
+
+- Install SASS in a project.
+  - `--save-dev`: Install it as development dependencies to help building our project. (Only for a helper and tool)
+  - `--save`: Install it as dependencies to build our project with the functions that it offers you.
+
+```bash
+npm install node-sass --save-dev
+npm install jquery --save
+```
+
+- Uninstall dependencies
+
+```bash
+npm uninstall jquery --save
 ```
