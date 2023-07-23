@@ -197,7 +197,7 @@ nav {
 
 <br>
 
-## 5. NPM Packages
+## 5. NPM Packages: Install SASS
 
 - Initiate npm packages in a project.
 
@@ -218,4 +218,27 @@ npm install jquery --save
 
 ```bash
 npm uninstall jquery --save
+```
+
+<br>
+
+## 6. NPM Scripts: Write and Compile SASS
+
+- You can use your own command line you defined on in scripts on 'package.json'.
+
+```json
+"scripts": {
+  "compile:sass": "node-sass sass/main.scss css.style -w" // compile scss file to css file + watch option
+}
+```
+
+```bash
+npm run compile:sass
+```
+
+- Or you can keep watching the result on live-server without compile.
+
+```bash
+npm install live-server -g
+live-server
 ```
