@@ -36,7 +36,7 @@ mkdir <path>
 
 ## touch(Mac) / edit(Windows)
 
-Change the current directory.
+create a new file.
 
 ```bash
 touch <filename>
@@ -68,22 +68,22 @@ Remove the file/folder. (Permanently, not into a trash bin)
 - File
 
   ```bash
-  rm <filename>
-  del <filename>
+  rm <names>
+  del <names>
   ```
 
 - Folder
 
   ```bash
-  rm -r <name>
-  del <name>
+  rm -r <names>
+  del <names>
   ```
 
-## open(Mac) / ""(Windows)
+## open(Mac) / (Windows)
 
 Open a file up.
 
 ```bash
 open <filename>
-"path"
+<path>
 ```

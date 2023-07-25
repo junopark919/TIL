@@ -243,3 +243,26 @@ import AuthContext from './store/auth-context';
   }}
 </AuthContext.Consumer>
 ```
+
+- More simpler way
+
+```javascript
+import { useContext } from 'react';
+
+const ctx = useContext(AuthContext);
+```
+
+### Context Limitations
+
+- React context is not optimized for high frequency changes.
+- Shouldn't be used to replace all component communications and props.
+
+### Rules of Hooks
+
+- Only call React hooks in React functions.
+  - React component functions
+  - Custom hooks
+- Only call React hooks at the top level.
+  - Don't call them in nested functions.
+  - Don't call them in any block statements.
+- extra, unofficial rule for useEffect(): Always add everything you refer to inside of useEffect() as a dependency.
