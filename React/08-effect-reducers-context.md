@@ -4,7 +4,7 @@
 
 ### 1. What is an Effect(Side Effect)?
 
-#### Main job: Render UI and react to user input
+Main job: Render UI and react to user input
 
 - Evaluate and render JSX
 - Manage State and props
@@ -13,13 +13,13 @@
 
 This all is 'baked into' React via the 'tools' and features covered in this course (i.e. useState() hook, props, etc.)
 
-#### Side Effects: Anything else
+Side Effects: Anything else
 
 - Store data in browser storage
 - Send http request to back-end servers
 - Set and manage timers
 
-These tasks must happen outside of the normal component evaluation and render cycle - especially since they might block/delay rendering (e.g. Http requests)
+These tasks must happen **outside of the normal component evaluation and render cycle** ⏤ especially since they might block/delay rendering. (e.g. Http requests)
 
 <br>
 
@@ -38,58 +38,51 @@ useEffect(() => { ... }, [ dependencies ]);
 
 ### 3. Using the useEffect() Hook
 
-- You lose all the data after reload.
-- You need to store data in the local storage of the browser.
-- `localStorage.setItem(key(string), value(string))`
+- You lose all the data after reload and you need to store data in the local storage of the browser.
+
+  ```javascript
+  localStorage.setItem(key, value); // Key and value both are string.
+  ```
+
 - You can check this data on 'DevTool > Application > LocalStorage'
 
-```javascript
-const [isLoggedIn, setIsLoggedIn] = useState(false);
+  ```javascript
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-const storedUserLoggedInInformation = localStorage.getItem('isLoggedIn');
-
-if (storedUserLoggedInInformation === '1') {
-  setIsLoggedIn(true);
-}
-
-const loginHandler = (email, password) => {
-  localStorage.setItem('isLoggedIn', '1');
-  setIsLoggedIn(true);
-};
-```
-
-- But this component function re-executes infinitely.
-- That is why useEffect() hook is needed here.
-- It will not run after every component evaluation, but only if the dependencies changed.
-
-#### useEffect()
-
-```javascript
-useEffect(() => {
   const storedUserLoggedInInformation = localStorage.getItem('isLoggedIn');
 
   if (storedUserLoggedInInformation === '1') {
     setIsLoggedIn(true);
   }
-}, []);
-```
 
-##### Logout
+  const loginHandler = (email, password) => {
+    localStorage.setItem('isLoggedIn', '1');
+    setIsLoggedIn(true);
+  };
 
-```javascript
-const logoutHandler = () => {
-  localStorage.removeItem('isLoggedIn');
-  setIsLoggedIn(false);
-};
-```
+  const logoutHandler = () => {
+    localStorage.removeItem('isLoggedIn');
+    setIsLoggedIn(false);
+  };
+  ```
+
+- But this component function re-executes infinitely and that is why useEffect() hook is needed here.
+
+  ```javascript
+  useEffect(() => {
+    const storedUserLoggedInInformation = localStorage.getItem('isLoggedIn');
+
+    if (storedUserLoggedInInformation === '1') {
+      setIsLoggedIn(true);
+    }
+  }, []);
+  ```
 
 <br>
 
 ### 4. What to Add & Not to Add as Dependencies
 
-- You don't need to add state updating functions.
-- You don't need to add 'built-in' APIs or functions.
-- You don't need to add variables or functions defined **outside** of your components.
+- You don't need to add **state updating functions**, **built-in** APIs or functions, variables or functions defined **outside of your components**.
 
 ```javascript
 import { useEffect, useState } from 'react';
@@ -116,11 +109,14 @@ const MyComponent = (props) => {
 - myTimer(out of component)
 - setTimeout(built-in API)
 
+<br>
+
 ### 5. Using the useEffect Cleanup Function
 
 #### Debouncing
 
-- Once the user made a pause during typing, works useEffect();
+- This function execution is fairly fast and that might be a problem.
+- Instead, you can wait for a pause of a certain time duration until you collect enough data.
 
 ```javascript
 useEffect(() => {
@@ -131,12 +127,16 @@ useEffect(() => {
     );
   }, 500);
 
+  // cleanup function
+  // cleanup function runs before every new side effect(execept for the very first time) function execution and before the component is removed.
   return () => {
     console.log('CLEANUP');
     clearTimeout(identifier);
   };
 }, [enteredEmail, enteredPassword]);
 ```
+
+<br>
 
 ### 6. Summary
 
@@ -151,10 +151,10 @@ useEffect(() => {
 ```
 
 - useEffect() runs for every time the component funtions reruns.
-- It runs **after** every component render cycle including the first time the component was mounted.
+- It runs **after every component render cycle** including the first time the component was mounted.
 - Once we add an empty array(dependency), it only executes for the first time the component was mounted and rendered, but **not after and for any subsequent render cycle**.
 - We also have the cleanup function, which we can return.
-- The cleanup function runs **before** this state function as a whole runs, but **not before the first time it runs**.
+- The cleanup function runs **before this state function as a whole runs**, but **not before the first time it runs**.
 
 <br>
 
@@ -194,12 +194,72 @@ const [state, dispatchFn] = useReducer(reducerFn, initialState, initFn);
 - When using useState() becomes cumbersome or you're getting a lot of bugs/unintended behaviors.
 - useState()
   - The main state management **tool**.
-  - It's for ndependent pieces of state/data.
+  - It's for independent pieces of state/data.
   - State updates are easy and limited to a few kinds of updates.
 - useReducer()
   - You need **more power**.
   - You have related pieces of state/data.
   - You have more complex state updates.
+
+```javascript
+// Initiate useReducer function
+import { React, useReducer } from 'react';
+
+const Login = (props) => {
+  const [emailState, dispatchEmail] = useReducer(emailReducer, {
+    value: '',
+    isValid: null,
+  });
+
+  const [passwordState, dispatchPassword] = useReducer(passwordReducer, {
+    value: '',
+    isValid: null,
+  });
+};
+```
+
+```javascript
+// Receives the latest state and return the new, updated state
+const emailChangeHandler = (event) => {
+  dispatchEmail({ type: 'USER_INPUT', val: event.target.value });
+};
+
+const passwordChangeHandler = (event) => {
+  dispatchPassword({ type: 'USER_INPUT', val: event.target.value });
+};
+
+const validateEmailHandler = (event) => {
+  dispatchEmail({ type: 'INPUT_BLUR' });
+};
+
+const validatePasswordHandler = (event) => {
+  dispatchPassword({ type: 'INPUT_BLUR' });
+};
+```
+
+```javascript
+// It can be defined out of userReducer() function, because any items here are not related to it.
+const emailReducer = (state, action) => {
+  if (action.type === 'USER_INPUT') {
+    return { value: action.val, isValid: action.val.includes('@') };
+  }
+  if (action.type === 'USER_BLUR') {
+    return { value: state.value, isValid: state.value.includes('@') };
+  }
+  // state.value can be the latest state
+  return { value: state.value, isValid: state.value.includes('@') };
+};
+
+const passwordReducer = (state, action) => {
+  if (action.type === 'USER_INPUT') {
+    return { value: action.val, isValid: action.val.trim().length > 6 };
+  }
+  if (action.type === 'USER_BLUR') {
+    return { value: state.value, isValid: state.value.trim().length > 6 };
+  }
+  return { value: state.value, isValid: state.value.trim().length > 6 };
+};
+```
 
 <br>
 
