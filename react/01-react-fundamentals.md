@@ -42,3 +42,17 @@ State → render/re-render(State is preserved throughout re-renders) → Updated
 ```
 
 ∵ React is called 'React' because it reacts to state changes by re-rendering the UI
+
+### State vs. Props
+
+- State
+  - **Internal** data, owned by component
+  - Component memory
+  - Can be updated by the component itself
+  - Updating state causes component to re-render
+  - Used to make components interactive
+- Props
+  - **External** data, owned by parent component
+  - Similar to function parameters
+  - Read-only
+  - **Receiving new props causes component to re-render.** Usually when the parent's state has been updated.
