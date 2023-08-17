@@ -1,5 +1,48 @@
 # REACT FUNDAMENTALS
 
+## 1. Introduction to React
+
+### 1. The Rise of Single-Page Applications(SPA)
+
+- Server-side rendering → Client-side rendering
+- Handling data + displaying data in a UI → UI needs to stay in sync with data → Hard problem to solve with vanilla JavaScript
+  - Requires lots of direct DOM manipulation and traversing(imperative) — spaghetti code
+  - Data(state) is usually stored in the DOM, shared across entire app — hard to reason + bugs
+
+### 2. Why Do Front-End Frameworks Exist?
+
+1. Front-end frameworks solve this problem and take hard work away from developers.
+2. They enforce a correct way of structuring and writing code(therefore contributing to solving the problem of spaghetti code)
+3. They give developers and teams a consistent way of building front-end applications.
+
+### 3. What is React?
+
+- JavaScript library for building user interfaces.
+
+  #### Component-Based
+
+  - Components are the building blocks of UI in React.
+  - Build complex UIs by building and combining multiple components.
+
+  #### Declarative
+
+  - Describe how components look like and how they work using a declarative syntax called JSX.
+  - Declarative: telling React what a component should look like, based on current data/state.
+  - React is abstraction away from DOM: never touch the DOM.
+  - JSX: a syntax that combines HTML, CSS, JS as well as referencing other components.
+
+  #### State-Driven
+
+  - React reacts to state changes by re-rendering the UI.
+
+  #### JavaScript Library
+
+  - React is only the 'view' layer. We need to pick multiple external libraries to build a complete application.
+
+<br />
+
+## 2. Components, Props and JSX
+
 ## 3. Interactive Components
 
 ### 1. What is State?
@@ -42,6 +85,10 @@ State → render/re-render(State is preserved throughout re-renders) → Updated
 ```
 
 ∵ React is called 'React' because it reacts to state changes by re-rendering the UI
+
+### Controlled Elements
+
+- An input element that is completely synchronized with state.
 
 ### State vs. Props
 
